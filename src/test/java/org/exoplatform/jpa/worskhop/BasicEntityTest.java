@@ -2,6 +2,7 @@ package org.exoplatform.jpa.worskhop;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import javax.persistence.Query;
@@ -22,6 +23,7 @@ public class BasicEntityTest extends JPATest {
     SuperHero spiderman = new SuperHero();
     spiderman.setName("Spiderman");
     spiderman.setCivilName("Peter Parker");
+    spiderman.setPicture("spiderman-picture".getBytes());
 
     // all operations that change the data must be done in a transaction
     entityManager.getTransaction().begin();
@@ -42,10 +44,12 @@ public class BasicEntityTest extends JPATest {
     SuperHero superHero = superHeros.iterator().next();
     assertEquals("Spiderman", superHero.getName());
     assertEquals("Peter Parker", superHero.getCivilName());
+    assertTrue(Arrays.equals("spiderman-picture".getBytes(), superHero.getPicture()));
 
     assertNotNull(fetchedSpiderman);
     assertEquals("Spiderman", fetchedSpiderman.getName());
     assertEquals("Peter Parker", fetchedSpiderman.getCivilName());
+    assertTrue(Arrays.equals("spiderman-picture".getBytes(), fetchedSpiderman.getPicture()));
   }
 
 }
