@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import org.exoplatform.jpa.workshop.entities.ComicsCharacter;
 import org.exoplatform.jpa.workshop.entities.Ennemy;
 import org.exoplatform.jpa.workshop.entities.Power;
 import org.junit.Test;
@@ -54,6 +55,7 @@ public class BasicEntityTest extends JPATest {
     assertEquals("Spiderman", fetchedSpiderman.getName());
     assertEquals("Peter Parker", fetchedSpiderman.getCivilName());
     assertTrue(Arrays.equals("spiderman-picture".getBytes(), fetchedSpiderman.getPicture()));
+    assertTrue(fetchedSpiderman instanceof ComicsCharacter);
   }
 
   @Test
@@ -88,9 +90,11 @@ public class BasicEntityTest extends JPATest {
     assertEquals("Spiderman", fetchedSpiderman.getName());
     assertEquals("Peter Parker", fetchedSpiderman.getCivilName());
     assertTrue(Arrays.equals("spiderman-picture".getBytes(), fetchedSpiderman.getPicture()));
+    assertTrue(fetchedSpiderman instanceof ComicsCharacter);
     List<Ennemy> ennemies = fetchedSpiderman.getEnnemies();
     assertNotNull(ennemies);
     assertEquals(2, ennemies.size());
+    assertTrue(ennemies.get(0) instanceof ComicsCharacter);
   }
 
 
@@ -126,6 +130,7 @@ public class BasicEntityTest extends JPATest {
     assertEquals("Spiderman", fetchedSpiderman.getName());
     assertEquals("Peter Parker", fetchedSpiderman.getCivilName());
     assertTrue(Arrays.equals("spiderman-picture".getBytes(), fetchedSpiderman.getPicture()));
+    assertTrue(fetchedSpiderman instanceof ComicsCharacter);
     List<Power> powers = fetchedSpiderman.getPowers();
     assertNotNull(powers);
     assertEquals(2, powers.size());
