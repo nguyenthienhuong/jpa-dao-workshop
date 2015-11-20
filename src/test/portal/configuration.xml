@@ -26,6 +26,11 @@
     <component>
         <type>org.exoplatform.commons.persistence.impl.EntityManagerService</type>
     </component>
+    
+    <component>
+        <key>org.exoplatform.jpa.workshop.dao.SuperHeroHandler</key>
+        <type>org.exoplatform.jpa.workshop.dao.jpa.SuperHeroDAOImpl</type>
+    </component>
 
   <external-component-plugins>
     <target-component>org.exoplatform.commons.api.persistence.DataInitializer</target-component>
@@ -39,6 +44,36 @@
           <description>Change logs of my addon</description>
           <value>db/changelogs/superhero.db.changelog-1.0.0.xml</value>
         </values-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+  
+  <external-component-plugins>
+    <target-component>org.exoplatform.container.definition.PortalContainerConfig</target-component>
+    <component-plugin>
+      <name>Add PortalContainer Definitions</name>
+      <set-method>registerChangePlugin</set-method>
+      <type>org.exoplatform.container.definition.PortalContainerDefinitionChangePlugin</type>
+      <priority>101</priority>
+      <init-params>
+        <values-param>
+          <name>apply.specific</name>
+          <value>portal</value>
+        </values-param>
+        <object-param>
+          <!-- The list of dependencies -->
+          <name>addDependencies</name>
+          <object type="org.exoplatform.container.definition.PortalContainerDefinitionChange$AddDependencies">
+            <field name="dependencies">
+              <collection type="java.util.ArrayList">
+                <!-- the context name that is configured in web.xml -->
+                <value>
+                  <string>exo-jpa-workshop</string>
+                </value>
+              </collection>
+            </field>
+          </object>
+        </object-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>
